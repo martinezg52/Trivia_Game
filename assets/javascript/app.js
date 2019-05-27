@@ -1,12 +1,13 @@
 
 //setting up initial function so JS runs after the page has loaded
 //final version of even listeners to hide remaining time and start the game
+//the .option below is calling a CSS style class, I learned you can manipulate css classes with jquery as well, not only bootstrap.
 
 $(document).ready(function() {
 
-$("#remaining-time").hide();
-$("start").on('click', trivia.startGame);
-$(document).on('click', '.option', trivia.guessChecker);
+    $("#remaining-time").hide();
+    $("#start").on('click', trivia.startGame);
+    $(document).on('click' , '.option', trivia.guessChecker);
 
 })
 
@@ -105,7 +106,7 @@ var trivia = {
         })
 
     },
-//Setting up conditionals  to handle time out event, increment unanswered counter and finally end the game and show results
+//Setting up conditionals  to handle time out event, timer numbers go red when 5 seconds remaining, increment unanswered counter and finally end the game and show results
 
     timerRunning: function(){
         if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
@@ -165,12 +166,13 @@ var trivia = {
         }
     },
 
+    //method to remove previous results and options, and begin next question
     guessResult : function() {
-        trivia.currrentSet++;
+        trivia.currentSet++;
         $('.option').remove();
         $('#results h3').remove();
         trivia.nextQuestion();
     }
 
 
-};
+}
